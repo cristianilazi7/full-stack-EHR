@@ -1,0 +1,58 @@
+/* Form Container */
+.ehr-form {
+  @apply flex flex-col w-full max-w-3xl p-6 bg-white shadow-md rounded-lg;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+/* Header Section (Title + Save Button aligned right) */
+.ehr-form__header {
+  @apply flex items-center justify-between mb-6;
+}
+
+/* Save Button (Aligned Right) */
+.ehr-form__save-button {
+  @apply flex items-center gap-2 text-white bg-green-500 hover:bg-green-600 font-medium px-4 py-2 rounded-lg transition-all;
+}
+
+/* Form Title */
+.ehr-form__title {
+  @apply text-2xl font-semibold text-gray-800;
+}
+
+/* EHR Name Input */
+.ehr-form__input--name {
+  @apply w-full text-lg font-medium mb-6 p-3 border border-gray-400 rounded-lg;
+}
+
+/* Fields Container */
+.ehr-form__fields {
+  @apply flex flex-col gap-4 mb-6;
+  max-height: 50vh;
+  overflow-y: auto;
+  padding-right: 8px; 
+}
+
+/* Field Group */
+.ehr-form__field-group {
+  @apply flex items-center gap-4 w-full;
+}
+
+/* Input Fields */
+.ehr-form__field {
+  @apply flex-1 p-3 border border-gray-300 rounded-lg shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+/* Delete Button */
+.ehr-form__delete-button {
+  @apply text-red-500 hover:text-red-700 transition-all p-2 rounded-lg bg-red-100 hover:bg-red-200 flex items-center justify-center;
+  min-width: 40px;
+  height: 48px;
+}
+
+/* Add Field Button */
+.ehr-form__add-button {
+  @apply w-full text-white bg-blue-500 hover:bg-blue-600 font-medium p-3 rounded-lg mt-6 transition-all;
+  position: sticky;
+  bottom: 0;
+}

@@ -1,0 +1,13 @@
+/* Footer Styles */
+.footer {
+    @apply row-start-3 flex gap-6 flex-wrap items-center justify-center text-sm text-gray-600;
+  }
+  
+  .footer__text {
+    @apply text-center;
+  }
+  
+  .footer__link {
+    @apply flex items-center gap-2 hover:underline hover:underline-offset-4;
+  }
+  

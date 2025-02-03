@@ -1,0 +1,12 @@
+.admin-page {
+    @apply p-6 bg-white rounded-lg shadow-md;
+  }
+  
+  .admin-page__title {
+    @apply text-2xl font-semibold text-blue-700;
+  }
+  
+  .admin-page__description {
+    @apply text-gray-600 mt-2;
+  }
+  

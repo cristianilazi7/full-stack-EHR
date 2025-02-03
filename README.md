@@ -1,44 +1,223 @@
-# full-stack-EHR
+# EHR Integration System - Backend
 
-# Senior Full-stack Engineering Take-home Assignment
+## 📌 Overview
 
-# Assignment Details
-This assignment will showcase your ability to build a full-stack system capable of handling and sending patient data to various EHR (Electronic Health Record) systems based on which EHR system is selected by the client (e.g. hospitals and clinics). This project will help us evaluate your understanding of transaction consistency, architectural choice, and practical problem-solving abilities. Use Typescript and React (or any React-based framework) for this assignment.
+This is the backend of the EHR (Electronic Health Records) Integration System. It provides GraphQL API endpoints for managing EHR mappings, user authentication, and data transformation between different EHR systems.
 
-# Problem Statement
-The patient will be answering questions that the clinical team has set up for their doctor visit, and the EHR will be determined by the client, e.g. the hospital. Each question can have a different mapping in each EHR – e.g. answering a question about symptoms goes into one API endpoint for an EHR and answering a question about family history is submitted to a different API endpoint for the same given EHR. Please refer to the Example of EHR mapping to see an example of what that could look like.
+## 🏗️ Technologies Used
 
-# Requirements
-# API
-● Implement a method within the API that can map input data received from users to the appropriate fields in the EHR systems. This method should be flexible to handle different types of input data and different EHR systems.
-● Implement a method that ensures transactions captured by your API are written to the correct users in the EHRs. This could involve validation checks, error handling, or other techniques.
-● Design the API in a way that allows for the addition of more EHR integrations without significant code changes. This could involve using a modular design or implementing a standard interface for EHR integrations.
-● Describe and plan out, but don’t implement, an API design that allows for scalability as more users are added. This could involve efficient data structures, load balancing, or other techniques.
- 
- ● Implement a system for managing the mappings for each EHR integration. This could involve storing the mappings in a database or configuration files, and providing methods for updating and retrieving these mappings.
-● Implement performance measures to ensure that the system remains performant as it scales. This could involve caching, efficient data structures, or other techniques.
-● Design a testing strategy for the API. This could involve any testing techniques of your choice. Bonus: Actually implement it if time permits.
-● Bonus: the API supports multi-language, e.g. questions and answers can be submitted in Spanish and English
-Frontend
-Based on the information from the API section above, you will need to implement an internal tool to:
-● Allow internal team members to be able to make changes for mappings based on EHRs.
-● Implement error handling and exception management based on valid inputs.
-● Plan a testing strategy for the frontend application. This could involve any testing
-techniques of your choice. Bonus: Actually implement it if time permits.
-● Bonus: Support multi-language on the front-end as well.
-● Bonus: Make bulk changes for patients for a given provider or hospital.
-Your work will be assessed on the overall architecture of the system, the design of the API, its security aspects, readability and modularity of code, and importantly the approach taken for ensuring future readiness such as backwards compatibility, performance, and scalability assurances. Please ensure that the end result is runnable on any standard machine without needing to install complex dependencies.
-What we will be evaluating and looking for:
-● Scalability: the system should be able to efficiently manage a load of 10 million concurrent active users.
-● Backward compatibility: while handling a large number of requests and transactional operations, the schema of the system needs to be robust, adaptive, but opinionated. The system should be designed in such a way that the addition
+- **NestJS** - Backend framework
+- **TypeORM** - ORM for database interaction
+- **PostgreSQL** - Database
+- **GraphQL (Apollo Server)** - API handling
+- **JWT Authentication** - Secure API access
 
-of new versions of the software does not obstruct the operation of the existing
-ones.
-● Service Resiliency: the system needs to present an immaculate service uptime
-and should be designed to keep the system resilient to failure by implementing
-necessary fault tolerance, redundancy, and failover mechanisms.
-● Performance: the system should be able to process a high number of requests
-per second and manage a large volume of data – e.g. optimizing the API for
-speed and resource allocation.
-● Security: the system should have security as a top priority. Use encryption,
-sanitization techniques to secure patient data during transmission, storage and authorization to access these data should be strictly controlled.
+## 📂 Project Structure
+
+```
+├── src/
+│   ├── application/
+│   ├── core/
+│   ├── infrastructure/
+│   ├── presentation/
+│   ├── main.ts
+├── .env
+├── docker-compose.yml
+├── package.json
+├── README.md
+```
+
+## 🛠️ Environment Variables
+
+The project uses an `.env` file to configure database and authentication settings.
+
+```
+# PostgreSQL Database Configuration
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=password
+DB_NAME=ehr_system
+
+# Apollo GraphQL Configuration
+GRAPHQL_PLAYGROUND=true
+GRAPHQL_DEBUG=true
+GRAPHQL_INTROSPECTION=true
+
+# JWT Authentication
+JWT_SECRET=mysecretkey
+JWT_EXPIRES_IN=3600s
+
+# Default Users
+PATIENT_EMAIL=patient@test.com
+PATIENT_PASSWORD=password123
+
+DOCTOR_EMAIL=doctor@test.com
+DOCTOR_PASSWORD=password123
+
+ADMIN_EMAIL=admin@test.com
+ADMIN_PASSWORD=admin123
+```
+
+## 📦 Installation & Setup
+
+1. Clone the repository:
+
+   ```sh
+   git clone https://github.com/your-repo/ehr-integration-backend.git
+   cd ehr-integration-backend
+   ```
+
+2. Install dependencies:
+
+   ```sh
+   npm install
+   ```
+
+3. Configure the `.env` file with your database credentials.
+
+4. Run the database using Docker:
+
+   ```sh
+   docker-compose up -d
+   ```
+
+5. Run the database migrations:
+
+   ```sh
+   npm run migration:run
+   ```
+
+6. Seed default users and mappings:
+
+   ```sh
+   npm run seed:run
+   ```
+
+7. Start the server:
+
+   ```sh
+   npm run start:dev
+   ```
+
+## 🚀 Features
+
+### ✅ User Authentication (JWT)
+
+- Users can log in with email and password.
+- Token-based authentication.
+
+### ✅ EHR Mappings
+
+- Stores and retrieves field mappings for different EHR systems.
+- Supports multiple EHR providers such as Athena and Allscripts.
+
+### ✅ GraphQL API
+
+- Query and mutation support for fetching and updating mappings.
+- Secure endpoints with JWT authentication.
+
+## 📌 Database Models
+
+### **User Entity**
+
+```typescript
+export class User {
+  id: number;
+  email: string;
+  password: string;
+  role: 'ROLE_ADMIN' | 'ROLE_DOCTOR' | 'ROLE_PATIENT';
+}
+```
+
+### **EHR Mapping Entity**
+
+```typescript
+export class EHRMapping {
+  ehrSystem: string;
+  sourceField: string;
+  targetField: string;
+}
+```
+
+## 📡 GraphQL API Endpoints
+
+### 🔹 Query: Get EHR Mappings
+
+```graphql
+query GetMappings($ehrSystem: String!) {
+  getMappings(ehrSystem: $ehrSystem) {
+    sourceField
+    targetField
+  }
+}
+```
+
+### 🔹 Mutation: Add or Update EHR Mappings
+
+```graphql
+mutation AddOrUpdateEHRMappings($ehrSystem: String!, $mappings: String!) {
+  addOrUpdateEHRMappings(ehrSystem: $ehrSystem, mappings: $mappings)
+}
+```
+
+### 🔹 Query: Get All EHR Systems
+
+```graphql
+query GetEHRSystems {
+  getEHRSystems {
+    ehrSystem
+  }
+}
+```
+
+## 🛡️ Authentication & Security
+
+- Uses **JWT** for authentication.
+- Protected GraphQL endpoints with `@UseGuards(JwtAuthGuard)`.
+- Passwords are securely hashed with **bcrypt**.
+
+## 🔹 Running the Database with Docker Compose
+To set up the PostgreSQL database using Docker, make sure you have **Docker** installed and run the following command:
+
+```sh
+docker-compose up -d
+```
+
+This will start the PostgreSQL database in a Docker container. Ensure that your `.env` file is properly configured before running this command.
+
+## 🚀 API Scalability Plan
+To ensure the system can handle increasing loads as more users are added, the following strategies will be implemented:
+
+### **1️⃣ Efficient Data Structures & Query Optimization**
+- **Indexes in PostgreSQL** for frequent queries (e.g., indexes on `email` for users and `ehrSystem` for mappings).
+- **Denormalization & Materialized Views** for frequently accessed data.
+
+### **2️⃣ Load Balancing & API Rate Limiting**
+- **GraphQL Caching** using **Redis** to store query responses and reduce database load.
+- **Load Balancing** with a cloud-based solution (AWS ALB, GCP Load Balancer) for high availability.
+
+### **3️⃣ Asynchronous Processing & Microservices**
+- **RabbitMQ / Kafka** for event-driven processing of heavy tasks.
+
+### **4️⃣ Horizontal Scaling**
+- **Auto-scaling via Kubernetes (K8s)** to dynamically adjust resources based on traffic.
+
+## 🔹 Frontend Installation
+1. Navigate to the frontend directory:
+   ```sh
+   cd help-ehr
+   ```
+2. Create an `.env.local` file with the following content:
+   ```sh
+   PORT=3001
+   NEXT_PUBLIC_API_URL=http://localhost:3000
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+4. Start the frontend application:
+   ```sh
+   npm run dev
+   ```

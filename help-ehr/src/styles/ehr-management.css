@@ -1,0 +1,10 @@
+/* Main EHR Management Page */
+.ehr-management {
+    @apply flex h-screen bg-gray-100;
+  }
+  
+  /* Container for List & Form */
+  .ehr-management__container {
+    @apply flex w-full max-w-5xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden;
+  }
+  

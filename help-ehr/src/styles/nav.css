@@ -1,0 +1,44 @@
+/* Navbar Container */
+.nav {
+    @apply flex justify-between items-center bg-white shadow-md py-4 px-6;
+}
+
+/* Navbar Inner Wrapper */
+.nav__container {
+    @apply flex justify-between items-center w-full max-w-7xl mx-auto;
+}
+
+/* Logo */
+.nav__logo {
+    @apply text-xl font-bold text-blue-600;
+}
+
+/* Desktop Navigation */
+.nav__menu {
+    @apply hidden md:flex gap-6;
+}
+
+/* Navigation Items */
+.nav__item {
+    @apply text-gray-600 text-lg font-medium px-4 py-2 rounded-md transition-all;
+}
+
+/* Active Link */
+.nav__item.active {
+    @apply text-white bg-blue-600 font-bold;
+}
+
+/* Hover Effects */
+.nav__item:hover {
+    @apply text-blue-600 bg-gray-100;
+}
+
+/* Mobile Menu Button */
+.nav__toggle {
+    @apply md:hidden text-2xl cursor-pointer;
+}
+
+/* Mobile Menu */
+.nav__mobile-menu {
+    @apply flex flex-col items-center gap-4 py-4 bg-white shadow-md fixed top-14 left-0 w-full md:hidden;
+}

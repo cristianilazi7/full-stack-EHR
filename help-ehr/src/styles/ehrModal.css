@@ -1,0 +1,32 @@
+/* Modal Overlay */
+.ehr-modal {
+    @apply fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center;
+  }
+  
+  /* Modal Content */
+  .ehr-modal__content {
+    @apply bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center;
+  }
+  
+  /* Modal Title */
+  .ehr-modal__title {
+    @apply text-lg font-semibold text-gray-800;
+  }
+  
+  /* Modal Buttons */
+  .ehr-modal__buttons {
+    @apply flex justify-between mt-4;
+  }
+  
+  .ehr-modal__button {
+    @apply px-4 py-2 rounded-md text-white;
+  }
+  
+  .ehr-modal__button--cancel {
+    @apply bg-gray-500 hover:bg-gray-600;
+  }
+  
+  .ehr-modal__button--confirm {
+    @apply bg-blue-500 hover:bg-blue-600;
+  }
+  
